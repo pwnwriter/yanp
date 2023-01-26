@@ -1,6 +1,6 @@
 #!/bin/bash
 
-chars_loc="$HOME/.local/share/chars.csv"
+chars_loc="/usr/local/share/yanp/chars.csv"
 clip="xclip -sel clip"
 menu="dmenu -i -l 5"
 
