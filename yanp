@@ -1,0 +1,47 @@
+#!/bin/bash
+
+chars_loc="$HOME/.local/share/chars.csv"
+clip="xclip -sel clip"
+menu="dmenu -i -l 5"
+
+if [ "$#" -eq 0 ]; then
+    echo "yanp: Yet another nerd font picker"
+    echo "       -d    dmenu"
+    echo "       -f    fzf"
+    echo "       -r    rofi"
+    exit
+fi
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -d|--dmenu)
+            menu="dmenu -i -l 5"
+            shift;;
+        -f|--fzf)
+            menu="fzf --height 40% --reverse"
+            shift;;
+        -r|--rofi)
+            menu="rofi -dmenu -i"
+            shift;;
+        *)
+            echo "Unknown option: $1"
+            exit 1;;
+    esac
+done
+
+[ ! -f "${chars_loc}" ] && { echo "${chars_loc} doesn't exist." >&2; exit 1; }
+
+readarray chars < "${chars_loc}"
+
+char_entry=$(
+    for char in "${chars[@]}"; {
+        echo "${char/,/ }"
+    } | ${menu}
+)
+
+[ -z "${char_entry}" ] && exit
+
+char="${char_entry% *}"
+
+printf "%s" "${char}" | ${clip}
+
