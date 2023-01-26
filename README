@@ -1,0 +1,32 @@
+
+Yanp
+-----
+
+Yet another nerd font glyph picker
+----------------------
+
+A  dmenu/fzf/rofi nerd font glyph picker
+
+
+requirements
+------------
+
+- dmenu/fzf/rofi
+- xclip 
+- a nerd font
+
+usage
+-----
+
+yanp: Yet another nerd font picker
+       -d    dmenu
+       -f    fzf
+       -r    rofi
+
+install
+-------
+sudo make install
+
+uninstall
+-------
+sudo make uninstall
